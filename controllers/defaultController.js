@@ -9,7 +9,7 @@ module.exports = {
         res.send('login post')
     },
     registerGet: (req, res) => {
-        res.send('regiter get');
+       res.render('default/register')
     },
     registerPost: (req, res) => {
         res.send('register post');
