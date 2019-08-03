@@ -11,6 +11,15 @@ router.all('/*', (req, res, next) => {
 router.route('/')
         .get(adminController.index);
 
+// post
+router.route('/posts')
+        .get(adminController.getPosts)
+        .post(adminController.submitPosts);
+
+        router.route('/posts/create')
+                .get(adminController.createPosts);
+
+// table users
 router.route('/table')
         .get(adminController.table);
 
