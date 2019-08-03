@@ -5,7 +5,7 @@ const morgan = require('morgan');
 const exphbs = require('express-handlebars');
 const flash = require('flash');
 const session = require('express-session');
-const { mongoUrl, PORT } = require('./config/config');
+const { mongoUrl, PORT, globalVariables } = require('./config/config');
 
 // configure mongoose to connect db
 mongoose.connect(mongoUrl, { useNewUrlParser: true}) 
@@ -29,6 +29,7 @@ app.use(session({
     resave: true
 }));
 app.use(flash());
+app.use(globalVariables);
 
 
 // setup view engine to handlebars

@@ -6,5 +6,5 @@ module.exports = {
         res.locals.error_message = req.flash('error-message');
 
         next();
-    }
+    },
 }
