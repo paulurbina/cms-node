@@ -9,9 +9,9 @@ module.exports = {
         res.send('sumit');
     },
     createPosts: (req, res) => {
-        res.send('create posts');
+        res.render('admin/posts/create');
     },
     table: (req, res) => {
-        res.render('admin/table');
+        res.render('admin/table/table');
     }
 }

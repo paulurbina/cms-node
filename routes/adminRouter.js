@@ -14,10 +14,10 @@ router.route('/')
 // post
 router.route('/posts')
         .get(adminController.getPosts)
-        .post(adminController.submitPosts);
 
         router.route('/posts/create')
-                .get(adminController.createPosts);
+                .get(adminController.createPosts)
+                .post(adminController.submitPosts);
 
 // table users
 router.route('/table')
