@@ -3,6 +3,8 @@ const mongoose = require('mongoose');
 const path = require('path');
 const morgan = require('morgan');
 const exphbs = require('express-handlebars');
+const flash = require('flash');
+const session = require('express-session');
 const { mongoUrl, PORT } = require('./config/config');
 
 // configure mongoose to connect db
@@ -19,6 +21,15 @@ app.use(express.urlencoded({ extended: true }));
 app.use(morgan('dev'));
 app.use(express.static(path.join(__dirname, './public')))
 app.set('views', path.join(__dirname, './views'));
+
+// configure flash and session
+app.use(session({
+    secret: '4524AE5B264E28B9A409C98A3B4314A1',
+    saveUninitialized: true,
+    resave: true
+}));
+app.use(flash());
+
 
 // setup view engine to handlebars
 app.engine('.hbs', exphbs({ 
