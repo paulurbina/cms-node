@@ -11,4 +11,7 @@ router.all('/*', (req, res, next) => {
 router.route('/')
         .get(adminController.index);
 
+router.route('/table')
+        .get(adminController.table);
+
 module.exports = router;
