@@ -1,6 +1,7 @@
 const express = require('express'); 
 const mongoose = require('mongoose');
 const path = require('path');
+const morgan = require('morgan');
 const exphbs = require('express-handlebars');
 const { mongoUrl, PORT } = require('./config/config');
 
@@ -15,6 +16,7 @@ const app = express();
 // configure express
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(morgan('dev'));
 app.use(express.static(path.join(__dirname, './public')))
 app.set('views', path.join(__dirname, './views'));
 
