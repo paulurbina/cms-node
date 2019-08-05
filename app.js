@@ -5,6 +5,7 @@ const morgan = require('morgan');
 const exphbs = require('express-handlebars');
 const flash = require('connect-flash');
 const session = require('express-session');
+const methodOverride = require('method-override');
 const { mongoUrl, PORT, globalVariables } = require('./config/config');
 
 // configure mongoose to connect db
@@ -40,6 +41,9 @@ app.engine('.hbs', exphbs({
     extname: '.hbs'
 }));
 app.set('view engine', '.hbs');
+
+//config method override
+app.use(methodOverride('newMethod'));
 
 //routes
 const defaultRouter = require('./routes/defaultRouter');
