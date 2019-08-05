@@ -1,4 +1,5 @@
 const Post = require('../models/Posts/Post');
+const Category = require('../models/Category.model');
 
 module.exports = {
     index: (req, res) => {
@@ -66,5 +67,23 @@ module.exports = {
     },
     table: (req, res) => {
         res.render('admin/table/table');
+    },
+
+    // all admin categories routes
+    getCategories: async (req, res) => {
+        const category = await Category.find();
+        res.render('admin/category/index', { category });
+    },
+    createCategories: async (req, res) => {
+        let categoryName = req.body.name;
+        if(categoryName) {
+            const category = await new Category({
+                title: categoryName
+            });
+            const newCategory = await category.save();
+            res.status(200).json(newCategory);
+        }
+        
     }
+
 }

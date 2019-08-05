@@ -7,7 +7,7 @@ const PostSchema = new Schema({
     status: {
         type: String, default: 'public'
     },
-    description: {
+    description: {  
         type: String, required: true
     },
     creationDate: {
