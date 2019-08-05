@@ -24,7 +24,7 @@ app.set('views', path.join(__dirname, './views'));
 
 // configure flash and session
 app.use(session({
-    secret: '4524AE5B264E28B9A409C98A3B4314A1',
+    secret: '4524AE5B264E28B9A409C98A3B4314A124',
     saveUninitialized: true,
     resave: true
 }));

@@ -18,11 +18,13 @@ module.exports = {
         try {
             const datablog =  await newPost.save();
             console.log(datablog);
-            req.flash('success-message', 'Post created successfully!')
+            // send message a client if OK
+            req.flash('success-message', 'Post created successfully!');
             res.redirect('/admin/posts');
         } catch(e) {
             console.log(e);
-            req.flash('error-message', 'Error to created!')
+            throw e;
+            // req.flash('error-message', 'Error to created!')
         }
     },
     createPosts: (req, res) => {

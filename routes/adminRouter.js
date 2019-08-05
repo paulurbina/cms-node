@@ -15,9 +15,9 @@ router.route('/')
 router.route('/posts')
         .get(adminController.getPosts)
 
-        router.route('/posts/create')
-                .get(adminController.createPosts)
-                .post(adminController.submitPosts);
+router.route('/posts/create')
+        .get(adminController.createPosts)
+        .post(adminController.submitPosts);
 
 // table users
 router.route('/table')
