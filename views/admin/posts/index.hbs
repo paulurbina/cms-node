@@ -9,6 +9,7 @@
                 <th scope="col">Description</th>
                 <th scope="col">Status</th>
                 <th scope="col">Comments Allowed</th>
+                <th scope="col">Category</th>
                 <th scope="col">Actions</th>
             </tr>
         </thead>
@@ -19,6 +20,7 @@
                     <td>{{description}}</td>
                     <td>{{status}}</td>
                     <td>{{allowComments}}</td>
+                    <td>{{category.title}}</td>
                     <td class="d-flex">
                         <a href="/admin/posts/edit/{{_id}}" class="btn btn-warning btn-sm mr-1">Edit</a>
                         <form action="/admin/posts/delete/{{_id}}?newMethod=DELETE" method="post">

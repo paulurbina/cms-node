@@ -19,7 +19,7 @@ const PostSchema = new Schema({
     },
     category: {
         type: Schema.Types.ObjectId,
-        ref: 'category'
+        ref: 'Category'
     },
     comments: {
         type: Schema.Types.ObjectId,

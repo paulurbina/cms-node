@@ -21,6 +21,16 @@
                         <option value="draft">Draft</option>
                     </select>
                 </div>
+
+                <div class="form-group">
+                    <label for="status">Category</label>
+                    <select name="category" id="category" class="form-control">
+                        {{#each category}}
+                            <option value="{{_id}}">{{title}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+
                 <div class="form-group">
                     <label for="content">Content</label>
                     <textarea class="form-control" id="description" name="description" placeholder="Enter to text" rows="5"></textarea>

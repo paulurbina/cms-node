@@ -6,9 +6,10 @@ module.exports = {
         res.render('admin/index');
     },
     getPosts: async (req, res) => {
-        const posts = await Post.find();
+        const posts = await Post.find().
+            populate('category');
         try {
-            if(posts && posts != {}) {
+            if(posts) {
                 res.render('admin/posts/index', { posts });
             }
         } catch(e) {
@@ -25,7 +26,8 @@ module.exports = {
             title: req.body.title,
             status: req.body.status,
             description: req.body.description,
-            allowComments: commentsAllOwed
+            allowComments: commentsAllOwed,
+            category: req.body.category
         });
 
         try {
@@ -45,8 +47,9 @@ module.exports = {
         }
             
     },
-    createPosts: (req, res) => {
-        res.render('admin/posts/create');
+    createPosts: async (req, res) => {    
+        const category = await Category.find();
+        res.render('admin/posts/create', { category });
     },
     editPosts:  async (req, res) => {
         const post = await Post.findById(req.params.id);
