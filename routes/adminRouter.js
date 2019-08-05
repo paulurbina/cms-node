@@ -9,7 +9,7 @@ router.all('/*', (req, res, next) => {
 });
 
 router.route('/')
-        .get(adminController.index);
+        .get(adminController.index);    
 
 // post
 router.route('/posts')
@@ -18,6 +18,9 @@ router.route('/posts')
 router.route('/posts/create')
         .get(adminController.createPosts)
         .post(adminController.submitPosts);
+
+router.route('/posts/edit/:id')
+        .get(adminController.editPosts);
 
 // table users
 router.route('/table')

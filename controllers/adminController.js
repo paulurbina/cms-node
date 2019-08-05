@@ -44,6 +44,10 @@ module.exports = {
     createPosts: (req, res) => {
         res.render('admin/posts/create');
     },
+    editPosts:  async (req, res) => {
+        const post = await Post.findById(req.params.id);
+        res.render('admin/posts/edit', { post });
+    },
     table: (req, res) => {
         res.render('admin/table/table');
     }
