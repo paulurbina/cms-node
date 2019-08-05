@@ -14,14 +14,22 @@ module.exports = {
             status: req.body.status,
             description: req.body.description
         });
-
-            await newPost.save().then(post => {
-                console.log(post);
-                // send message a client if OK
-                req.flash('success_message', 'Post created successfully!');
-                res.redirect('/admin/posts');
-            });
-         
+        try {
+            if(newPost) {
+                await newPost.save().then(post => {
+                    console.log(post);
+                    // send message a client if OK
+                    req.flash('success_message', 'Post created successfully!');
+                    res.redirect('/admin/posts');
+                });    
+            } 
+                     
+        } catch(e) {
+            console.log(e);
+            req.flash('error_message', 'Error created Post!');
+            throw e;
+        }
+            
     },
     createPosts: (req, res) => {
         res.render('admin/posts/create');
