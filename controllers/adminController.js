@@ -4,8 +4,18 @@ module.exports = {
     index: (req, res) => {
         res.render('admin/index');
     },
-    getPosts: (req, res) => {
-        res.render('admin/posts/index');
+    getPosts: async (req, res) => {
+        const posts = await Post.find();
+        try {
+            if(posts && posts != {}) {
+                res.render('admin/posts/index', { posts });
+                console.log(posts);
+            }
+        } catch(e) {
+            res.status(404).send('bad request', e);
+            throw e;
+        }
+
     },
     //send data of form create blog
     submitPosts: async (req, res) => {
