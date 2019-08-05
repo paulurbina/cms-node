@@ -18,7 +18,7 @@ module.exports = {
             await newPost.save().then(post => {
                 console.log(post);
                 // send message a client if OK
-                req.flash('success-message', 'Post created successfully!');
+                req.flash('success_message', 'Post created successfully!');
                 res.redirect('/admin/posts');
             });
          
