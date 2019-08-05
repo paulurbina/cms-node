@@ -15,17 +15,13 @@ module.exports = {
             description: req.body.description
         });
 
-        try {
-            const datablog =  await newPost.save();
-            console.log(datablog);
-            // send message a client if OK
-            req.flash('success-message', 'Post created successfully!');
-            res.redirect('/admin/posts');
-        } catch(e) {
-            console.log(e);
-            throw e;
-            // req.flash('error-message', 'Error to created!')
-        }
+            await newPost.save().then(post => {
+                console.log(post);
+                // send message a client if OK
+                req.flash('success-message', 'Post created successfully!');
+                res.redirect('/admin/posts');
+            });
+         
     },
     createPosts: (req, res) => {
         res.render('admin/posts/create');

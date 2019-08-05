@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const path = require('path');
 const morgan = require('morgan');
 const exphbs = require('express-handlebars');
-const flash = require('flash');
+const flash = require('connect-flash');
 const session = require('express-session');
 const { mongoUrl, PORT, globalVariables } = require('./config/config');
 
