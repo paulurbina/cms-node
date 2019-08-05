@@ -5,7 +5,7 @@ module.exports = {
         res.render('admin/index');
     },
     getPosts: (req, res) => {
-        res.send('all posts');
+        res.render('admin/posts/index');
     },
     //send data of form create blog
     submitPosts: async (req, res) => {
