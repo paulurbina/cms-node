@@ -22,6 +22,8 @@ router.route('/posts/create')
 router.route('/posts/edit/:id')
         .get(adminController.editPosts);
 
+router.route('/posts/delete/:id')
+        .delete(adminController.deletePosts);
 // table users
 router.route('/table')
         .get(adminController.table);

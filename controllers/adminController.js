@@ -51,6 +51,19 @@ module.exports = {
         const post = await Post.findById(req.params.id);
         res.render('admin/posts/edit', { post });
     },
+    deletePosts: async (req, res) => {
+        const postDelete = await Post.findByIdAndDelete(req.params.id);
+        if(postDelete) {
+            req.flash('success-message', `The Post ${postDelete.title} delete`);
+            res.redirect('/admin/posts');
+        }
+        req.flash('error-message', `The Post ${postDelete.title} Not delete`);
+        res.json({
+            message: 'Error',
+            err: err
+        })
+        
+    },
     table: (req, res) => {
         res.render('admin/table/table');
     }
