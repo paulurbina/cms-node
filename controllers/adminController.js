@@ -9,7 +9,6 @@ module.exports = {
         try {
             if(posts && posts != {}) {
                 res.render('admin/posts/index', { posts });
-                console.log(posts);
             }
         } catch(e) {
             res.status(404).send('bad request', e);
@@ -19,11 +18,15 @@ module.exports = {
     },
     //send data of form create blog
     submitPosts: async (req, res) => {
+
+        var commentsAllOwed = req.body.allowComments ? true: false; 
         const newPost =  new Post({
             title: req.body.title,
             status: req.body.status,
-            description: req.body.description
+            description: req.body.description,
+            allowComments: commentsAllOwed
         });
+
         try {
             if(newPost) {
                 await newPost.save().then(post => {

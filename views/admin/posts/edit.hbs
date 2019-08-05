@@ -3,12 +3,12 @@
 
         <div class="col-md-6 offset-md-3">
             <div class="alert alert-secondary text-center" role="alert">
-                Edit Post
+                Edit Post <strong>'{{post.title}}'</strong>
             </div>
             <form method="POST" action="/admin/posts/create">
                 <div class="form-group">
                     <label for="exampleInputEmail1">Title Blog</label>
-                    <input type="text" name="title" class="form-control" id="title" aria-describedby="emailHelp"
+                    <input type="text" name="title" class="form-control" id="title" value="{{post.title}}"
                         placeholder="Enter to title">
 
                 </div>
@@ -20,17 +20,17 @@
                         <option value="private">Private</option>
                         <option value="draft">Draft</option>
                     </select>
-                </div>
+                </div>  
                 <div class="form-group">
                     <label for="content">Content</label>
-                    <textarea class="form-control" id="description" name="description" placeholder="Enter to text" rows="5"></textarea>
+                    <textarea class="form-control" id="description" name="description" placeholder="Enter to text" rows="5">{{post.description}}</textarea>
                 </div>
 
                 <div class="form-group form-check">
-                    <input type="checkbox" class="form-check-input" id="allowComments" name="allowComments">
+                    <input type="checkbox" class="form-check-input" id="allowComments" name="allowComments" checked="{{post.allowComments}}">
                     <label class="form-check-label" for="exampleCheck1">Allow Comments</label>
                 </div>
-                <button type="submit" class="btn btn-success btn-block">Create Post</button>
+                <button type="submit" class="btn btn-warning btn-block">Edit Post</button>
             </form>
         </div>
     </div>
