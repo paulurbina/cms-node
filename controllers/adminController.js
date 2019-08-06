@@ -52,19 +52,33 @@ module.exports = {
         res.render('admin/posts/create', { category });
     },
     editPosts:  async (req, res) => {
-        const id = req.params.id;
-        // search id
-        // const post = await Post.findById(id);
-        // select category for id
-        // const cats = await Category.find();
-        // sending data a template edit
-        // res.render('admin/posts/edit', { post, cats });
-          Post.findById(id).
-            then(post => {
-                Category.find().then(cats => {
+        try {
+            // observe errors prox
+            const post = await Post.findById(req.params.id);
+            if(!post) {
+                res.redirect('/admin/posts');
+                res.flash('success-message', `This Post Has Delete!`);
+            } else if(post && post != {}) {
+                const cats = await Category.find(post.category.title);
+                if(cats) {
                     res.render('admin/posts/edit', { post, cats });
-                })
-            })
+                    res.flash('success-message', `Update ${post.title} has successfully!`);
+                }                
+            }
+        } catch(e) {
+            res.flash('error-message', `Error ${post.title} has Not Update!`);
+            throw e;
+        }
+        // select category for id
+    },
+    editPostSubmit: async (req, res) => {
+            // observe errors prox
+
+        var commentsAllOwed = req.body.allowComments ? true: false; 
+        const { title, status, description, category, allowComments = commentsAllOwed } = req.body;
+        await Post.findByIdAndUpdate(req.params.id, {title, status, description, category, allowComments});
+        req.flash('success-message', `Update with ${title} has successfully!`);
+        res.redirect('/admin/posts');
     },
     deletePosts: async (req, res) => {
         const postDelete = await Post.findByIdAndDelete(req.params.id);
