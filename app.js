@@ -53,5 +53,6 @@ app.use('/admin', adminRouter);
 
 // server listening
 app.listen(PORT, () => { 
-    console.log('Server on port 3000');
+    console.log(`>>Server on port ${PORT}`);
+    console.log(`>>Cancel Server Ctrl+C`);
 });
