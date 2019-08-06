@@ -25,9 +25,11 @@
                  <div class="form-group">
                     <label for="status">Category</label>
                     <select name="category" id="category" class="form-control">
-                        {{#each category}}
-                            <option value="{{_id}}">{{title}}</option>
-                        {{/each}}
+                        {{#select post.category}}
+                            {{#each cats}}
+                                <option value="{{_id}}">{{title}}</option>
+                            {{/each}}
+                        {{/select}}
                     </select>
                 </div>
                 

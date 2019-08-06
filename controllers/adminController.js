@@ -52,8 +52,19 @@ module.exports = {
         res.render('admin/posts/create', { category });
     },
     editPosts:  async (req, res) => {
-        const post = await Post.findById(req.params.id);
-        res.render('admin/posts/edit', { post });
+        const id = req.params.id;
+        // search id
+        // const post = await Post.findById(id);
+        // select category for id
+        // const cats = await Category.find();
+        // sending data a template edit
+        // res.render('admin/posts/edit', { post, cats });
+          Post.findById(id).
+            then(post => {
+                Category.find().then(cats => {
+                    res.render('admin/posts/edit', { post, cats });
+                })
+            })
     },
     deletePosts: async (req, res) => {
         const postDelete = await Post.findByIdAndDelete(req.params.id);

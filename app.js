@@ -40,7 +40,7 @@ app.engine('.hbs', exphbs({
     partialsDir: path.join(app.get('views'), 'partials'),
     layoutsDir: path.join(app.get('views'), 'layouts'),
     extname: '.hbs',
-    helpers: { selectOptions }
+    helpers: { select: selectOptions }
 }));
 app.set('view engine', '.hbs');
 
