@@ -6,6 +6,7 @@ const exphbs = require('express-handlebars');
 const flash = require('connect-flash');
 const session = require('express-session');
 const methodOverride = require('method-override');
+const { selectOptions } = require('./config/customFunctions');
 const { mongoUrl, PORT, globalVariables } = require('./config/config');
 
 // configure mongoose to connect db
@@ -38,7 +39,8 @@ app.engine('.hbs', exphbs({
     defaultLayout: 'default',
     partialsDir: path.join(app.get('views'), 'partials'),
     layoutsDir: path.join(app.get('views'), 'layouts'),
-    extname: '.hbs'
+    extname: '.hbs',
+    helpers: { selectOptions }
 }));
 app.set('view engine', '.hbs');
 
