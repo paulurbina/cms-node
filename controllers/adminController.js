@@ -110,6 +110,12 @@ module.exports = {
             res.status(200).json(newCategory);
         }
         
+    },
+    editCategoryGet: async (req, res) => {
+        const categories = await Category.find(req.params.id);
+        const categoryId = Category.findById(catId);
+        res.render('admin/category/admin', { categories, categoryId });
+
     }
 
 }

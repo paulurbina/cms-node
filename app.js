@@ -9,8 +9,8 @@ const methodOverride = require('method-override');
 const { selectOptions } = require('./config/customFunctions');
 const { mongoUrlNative, PORT, globalVariables, mongoServiceMlab } = require('./config/config');
 
-// configure mongoose to connect db
-mongoose.connect(mongoServiceMlab, { useNewUrlParser: true}) 
+// configure mongoose to connect db 
+mongoose.connect(mongoServiceMlab || mongoUrlNative, { useNewUrlParser: true}) 
     .then(db => console.log('>> Connect Database Native'))
     .catch(e => console.log(e));
 
