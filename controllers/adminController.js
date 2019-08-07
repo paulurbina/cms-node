@@ -69,11 +69,9 @@ module.exports = {
             res.flash('error-message', `Error ${post.title} has Not Update!`);
             throw e;
         }
-        // select category for id
     },
     editPostSubmit: async (req, res) => {
             // observe errors prox
-
         var commentsAllOwed = req.body.allowComments ? true: false; 
         const { title, status, description, category, allowComments = commentsAllOwed } = req.body;
         await Post.findByIdAndUpdate(req.params.id, {title, status, description, category, allowComments});

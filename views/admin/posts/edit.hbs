@@ -5,7 +5,7 @@
             <div class="alert alert-secondary text-center" role="alert">
                 Edit Post <strong>'{{post.title}}'</strong>
             </div>
-            <form method="POST" action="/admin/posts/edit?newMethod=PUT">
+            <form method="POST" action="/admin/posts/edit/{{post._id}}?newMethod=PUT">
                 <div class="form-group">
                     <label for="exampleInputEmail1">Title Blog</label>
                     <input type="text" name="title" class="form-control" id="title" value="{{post.title}}"
