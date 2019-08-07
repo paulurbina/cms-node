@@ -7,16 +7,16 @@ const flash = require('connect-flash');
 const session = require('express-session');
 const methodOverride = require('method-override');
 const { selectOptions } = require('./config/customFunctions');
-const { mongoUrl, PORT, globalVariables } = require('./config/config');
+const { mongoUrl, PORT, globalVariables, mongoServiceMlab } = require('./config/config');
 
 // configure mongoose to connect db
-mongoose.connect(mongoUrl, { useNewUrlParser: true}) 
-    .then(db => console.log('>> Connect Database Native'))
+mongoose.connect(mongoServiceMlab, { useNewUrlParser: true}) 
+    .then(db => console.log('>> Connect Database Mlab'))
     .catch(e => console.log(e));
 
 // start variables
 const app = express();
-
+ 
 // configure express
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
