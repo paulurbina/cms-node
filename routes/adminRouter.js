@@ -30,6 +30,7 @@ router.route('/posts/delete/:id')
 router.route('/category')
         .get(adminController.getCategories)
         .post(adminController.createCategories);
+        
 router.route('/category/edit/:id')
         .get(adminController.editCategoryGet);
 

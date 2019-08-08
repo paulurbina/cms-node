@@ -111,10 +111,12 @@ module.exports = {
         
     },
     editCategoryGet: async (req, res) => {
-        const categories = await Category.find(req.params.id);
-        const categoryId = Category.findById(catId);
-        res.render('admin/category/admin', { categories, categoryId });
-
+        const allCategory = await Category.find();
+        const uniqueCategory = await Category.findById(req.params.id);
+        res.render('admin/category/edit', { allCategory, uniqueCategory });
+        //Category.findById(catId).then(cat => {
+         //   res.render('admin/category/edit', { categories, cat });
+        //})
     }
 
 }
