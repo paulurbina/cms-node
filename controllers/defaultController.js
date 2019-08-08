@@ -1,7 +1,7 @@
 const Post = require('../models/Posts/Post');
 const Category = require('../models/Category.model');
 const User = require('../models/User.model');
-var bcrypt = require('bcryptjs');
+const bcrypt = require('bcryptjs');
 
 module.exports = {
     index :  async (req, res) => {
