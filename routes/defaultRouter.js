@@ -55,7 +55,7 @@ passport.deserializeUser(function(id, done) {
 // login
 router.route('/login')
         .get(defaultController.loginGet)
-        .post(passport.authenticate('local', {
+        .post(passport.authenticate('local', { // verification
                 successRedirect: '/admin',
                 failureRedirect: '/login',
                 failureFlash: true,
