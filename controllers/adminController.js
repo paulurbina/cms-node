@@ -45,28 +45,27 @@ module.exports = {
             req.flash('error_message', 'Error created Post!');
             throw e;
         }
-            
+
     },
     createPosts: async (req, res) => {    
         const category = await Category.find();
         res.render('admin/posts/create', { category });
     },
     editPosts:  async (req, res) => {
+        const post = await Post.findById(req.params.id);
         try {
-            // observe errors prox
-            const post = await Post.findById(req.params.id);
             if(!post) {
                 res.redirect('/admin/posts');
-                res.flash('success-message', `This Post Has Delete!`);
+                req.flash('success-message', `This Post Has Delete!`);
             } else if(post && post != {}) {
                 const cats = await Category.find(post.category.title);
                 if(cats) {
                     res.render('admin/posts/edit', { post, cats });
-                    res.flash('success-message', `Update ${post.title} has successfully!`);
+                    req.flash('success-message', `Update ${post.title} has successfully!`);
                 }                
             }
         } catch(e) {
-            res.flash('error-message', `Error ${post.title} has Not Update!`);
+            req.flash('error-message', `Error ${post.title} has Not Update!`);
             throw e;
         }
     },
