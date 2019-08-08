@@ -5,7 +5,8 @@ const morgan = require('morgan');
 const exphbs = require('express-handlebars');
 const flash = require('connect-flash');
 const session = require('express-session');
-const methodOverride = require('method-override');
+const methodOverride = require('method-override'); 
+const fileupload = require('express-fileupload');
 const { selectOptions } = require('./config/customFunctions');
 const { mongoUrlNative, PORT, globalVariables, mongoServiceMlab } = require('./config/config');
 
@@ -33,6 +34,8 @@ app.use(session({
 app.use(flash());
 app.use(globalVariables);
 
+//config fileupload middleware
+app.use(fileupload());
 
 // setup view engine to handlebars
 app.engine('.hbs', exphbs({ 

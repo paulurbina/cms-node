@@ -5,12 +5,17 @@
             <div class="alert alert-secondary text-center" role="alert">
                 Create Post!
             </div>
-            <form method="POST" action="/admin/posts/create">
+            <form method="POST" action="/admin/posts/create" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="exampleInputEmail1">Title Blog</label>
                     <input type="text" name="title" class="form-control" id="title" aria-describedby="emailHelp"
                         placeholder="Enter to title">
 
+                </div>
+
+                <div class="form-group">
+                    <label for="fileupload">File Upload</label>
+                    <input type="file" class="form-control-file" name="uploadedFiles" id="file">
                 </div>
 
                 <div class="form-group">

@@ -1,5 +1,6 @@
 const Post = require('../models/Posts/Post');
 const Category = require('../models/Category.model');
+const { isEmpty } = require('../config/customFunctions');
 
 module.exports = {
     index: (req, res) => {
@@ -22,12 +23,30 @@ module.exports = {
     submitPosts: async (req, res) => {
 
         var commentsAllOwed = req.body.allowComments ? true: false; 
+
+        // checkout input file
+        let filename = '';
+        if(!isEmpty(req.files)) {
+            let file  = req.files.uploadedFiles;
+            filename = file.name;
+            // dir of uploads
+            let uploadDir = './public/uploads/';
+
+            // move to directory
+            file.mv(uploadDir+filename, (err) => {
+                if (err) {
+                    throw err;
+                }
+            });
+        }
+
         const newPost =  new Post({
             title: req.body.title,
             status: req.body.status,
             description: req.body.description,
             allowComments: commentsAllOwed,
-            category: req.body.category
+            category: req.body.category,
+            file: `/uploads/${filename}`
         });
 
         try {
