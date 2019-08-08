@@ -114,9 +114,16 @@ module.exports = {
         const allCategory = await Category.find();
         const uniqueCategory = await Category.findById(req.params.id);
         res.render('admin/category/edit', { allCategory, uniqueCategory });
-        //Category.findById(catId).then(cat => {
-         //   res.render('admin/category/edit', { categories, cat });
-        //})
+    },
+    editCategoryPost: async (req, res) => {
+        const title = req.body.name;
+        if(title) {
+            const newTitle = await Category.findByIdAndUpdate(req.params.id, { title });
+            await newTitle.save();
+            res.status(200).json({
+                url: '/admin/category'
+            });
+        }
     }
 
 }

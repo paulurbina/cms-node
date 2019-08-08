@@ -25,4 +25,20 @@ $(document).ready(function() {
         $('#form-category')[0].reset();
         
     });
+    $('#update-category-button').on('click', function (e) {
+        e.preventDefault();
+        var data = $('#category-title').val();
+        var id = $('#category-id').val();
+
+        $.ajax({
+            url: `/admin/category/edit/${id}`,
+            type: 'POST',
+            data: {name: data},
+            success: function(response) {
+               window.location.href = response.url;
+            }
+        });
+        $('#form-category')[0].reset();
+        
+    });
 });
