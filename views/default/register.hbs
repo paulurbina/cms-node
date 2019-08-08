@@ -1,30 +1,45 @@
+
+
 <div class="row">
     <div class="col-md-6 offset-md-3">
+        <!-- messages errors-->
+        {{#if errors}}
+            {{#each errors}}
+                <div class="alert alert-danger alert-dismissible fade show" role="alert" style="height: 50px;">
+                    <p>{{message}}</p>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            {{/each}}
+        {{/if}}
+        <!-- messages errors-->
+
         <div class="alert alert-success text-center" role="alert">
-            Register User
+            <h3>Register User</h3>
         </div>
         <form method="POST" action="/register">
             <div class="form-group">
                 <label for="exampleInputEmail1">First Name</label>
-                <input name="firstName" type="text" class="form-control" aria-describedby="" placeholder="Enter First Name" required>
+                <input name="firstName" type="text" class="form-control" aria-describedby="" placeholder="Enter First Name" >
             </div>
             <div class="form-group">
                 <label for="exampleInputEmail1">Last Name</label>
-                <input name="lastName" type="text" class="form-control" aria-describedby="" placeholder="Enter Last Name" required>
+                <input name="lastName" type="text" class="form-control" aria-describedby="" placeholder="Enter Last Name" >
             </div>
              <div class="form-group">
                 <label for="exampleInputEmail1">Email Addres</label>
-                <input name="email" type="email" class="form-control" aria-describedby="" placeholder="Enter Email" required>
+                <input name="email" type="email" class="form-control" aria-describedby="" placeholder="Enter Email" >
             </div>
             <div class="form-group">
                 <div class="row">
                     <div class="col-md-6">
                         <label for="exampleInputEmail1">Password</label>
-                        <input name="password" type="password" class="form-control" placeholder="Enter Password" required>
+                        <input name="password" type="password" class="form-control" placeholder="Enter Password" >
                     </div>
                     <div class="col-md-6">
                          <label for="exampleInputEmail1">Confirm Password</label>
-                        <input name="passwordConfirm" type="password" class="form-control" placeholder="Confirm Password" required>
+                        <input name="passwordConfirm" type="password" class="form-control" placeholder="Confirm Password" >
                     </div>
                 </div>
             </div>

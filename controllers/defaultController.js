@@ -48,14 +48,14 @@ module.exports = {
             // if existing user in db
             if(user) {
                 req.flash('error-message', 'Email already exists, try to login');
-                res.redirec('/login');
+                res.redirect('/login');
             } else {
                 // create new user
-                const newUser = await  new User(req.body);
+                const newUser = await new User(req.body);
 
-                // usin bcrypt
+                // using bcrypt
                 bcrypt.genSalt(10, (err, salt) => {
-                    bcrypt.hash(newUser.password, salt, (err, hash) => {
+                    bcrypt.hash(newUser.password, salt, async (err, hash) => {
                         newUser.password = hash;
                         await newUser.save();
                         // sending message OK!
