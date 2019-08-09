@@ -88,11 +88,11 @@ module.exports = {
             throw e;
         }
     },
-    editPostSubmit: async (req, res) => {
+    editPostSubmit: async (req, res) => {   
             // observe errors prox
         var commentsAllOwed = req.body.allowComments ? true: false; 
-        const { title, status, description, category, allowComments = commentsAllOwed } = req.body;
-        await Post.findByIdAndUpdate(req.params.id, {title, status, description, category, allowComments});
+        const { title, status, description, category } = req.body;
+        await Post.findByIdAndUpdate(req.params.id, {title, status, description, category, commentsAllOwed});
         req.flash('success-message', `Update with ${title} has successfully!`);
         res.redirect('/admin/posts');
     },
