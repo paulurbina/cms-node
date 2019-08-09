@@ -18,7 +18,7 @@ module.exports = {
         res.send('login post')
     },
     registerGet: (req, res) => {
-       res.render('default/register')
+       res.render('default/register')   
     },
     registerPost: async (req, res) => {
         // users after express-validation
