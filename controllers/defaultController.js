@@ -1,7 +1,6 @@
 const Post = require('../models/Posts/Post');
 const Category = require('../models/Category.model');
 const User = require('../models/User.model');
-const bcrypt = require('bcryptjs');
 
 module.exports = {
     index :  async (req, res) => {
@@ -15,7 +14,6 @@ module.exports = {
         res.render('default/login')
     },
     loginPost: (req, res) => {
-        res.send('login post')
     },
     registerGet: (req, res) => {
        res.render('default/register')   
@@ -47,28 +45,19 @@ module.exports = {
             
             // if existing user in db
             if(user) {
-                req.flash('error-message', 'Email already exists, try to login');
+                req.flash('error_message', 'Email already exists, try to login');
                 res.redirect('/register');
             } else {
-                // create new user
-                const newUser = await new User(req.body);
-
-                // using bcrypt
-                bcrypt.genSalt(10, (err, salt) => {
-                    if(err) throw err;
-                    if(newUser) {
-                        bcrypt.hash(newUser.password, salt, async (err, hash) => {
-                            if(err) throw err; 
-                            // linking
-                            newUser.password = hash;
-                            await newUser.save();
-                            // sending message OK!
-                            req.flash('success-message', 'You are now Registered!');
-                            res.redirect('/login');
-                        });
-                    }
-                    
-                });
+                const emailUser = await User.findOne({ email: email });
+                if(emailUser) {
+                    req.flash('error_message', 'The Email is already in use!');
+                    res.redirect('/register');
+                }
+                const newUser = new User({ firstName, lastName, email, password });
+                newUser.password = await newUser.generateHash(password);
+                await newUser.save();
+                req.flash('success_messsage', 'You are registered');
+                res.redirect('/login');
             }
             
         }
