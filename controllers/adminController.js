@@ -96,7 +96,7 @@ module.exports = {
         req.flash('success-message', `Update with ${title} has successfully!`);
         res.redirect('/admin/posts');
     },
-    deletePosts: async (req, res) => {
+    deletePosts: async (err, req, res) => {
         const postDelete = await Post.findByIdAndDelete(req.params.id);
         if(postDelete) {
             req.flash('success-message', `The Post ${postDelete.title} delete`);
@@ -106,7 +106,7 @@ module.exports = {
         res.json({
             message: 'Error',
             err: err
-        })
+        });
         
     },
     table: (req, res) => {

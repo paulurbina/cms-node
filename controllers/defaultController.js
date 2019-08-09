@@ -48,20 +48,26 @@ module.exports = {
             // if existing user in db
             if(user) {
                 req.flash('error-message', 'Email already exists, try to login');
-                res.redirect('/login');
+                res.redirect('/register');
             } else {
                 // create new user
                 const newUser = await new User(req.body);
 
                 // using bcrypt
                 bcrypt.genSalt(10, (err, salt) => {
-                    bcrypt.hash(newUser.password, salt, async (err, hash) => {
-                        newUser.password = hash;
-                        await newUser.save();
-                        // sending message OK!
-                        req.flash('success-message', 'You are now Registered!');
-                        res.redirect('/login');
-                    });
+                    if(err) throw err;
+                    if(newUser) {
+                        bcrypt.hash(newUser.password, salt, async (err, hash) => {
+                            if(err) throw err; 
+                            // linking
+                            newUser.password = hash;
+                            await newUser.save();
+                            // sending message OK!
+                            req.flash('success-message', 'You are now Registered!');
+                            res.redirect('/login');
+                        });
+                    }
+                    
                 });
             }
             
