@@ -5,6 +5,7 @@ const morgan = require('morgan');
 const exphbs = require('express-handlebars');
 const flash = require('connect-flash');
 const session = require('express-session');
+const passport = require('passport');
 const methodOverride = require('method-override'); 
 const fileupload = require('express-fileupload');
 const { selectOptions } = require('./config/customFunctions');
@@ -14,6 +15,8 @@ const { mongoUrlNative, PORT, globalVariables, mongoServiceMlab } = require('./c
 mongoose.connect(mongoUrlNative || mongoUrlNative, { useNewUrlParser: true}) 
     .then(db => console.log('>> Connect Database Native'))
     .catch(e => console.log(e));
+
+require('./config/passport')(passport);
 
 // start variables
 const app = express();
@@ -32,6 +35,12 @@ app.use(session({
     resave: true
 }));
 app.use(flash());
+
+// passport config
+app.use(passport.initialize());
+app.use(passport.session());
+
+// use variable global
 app.use(globalVariables);
 
 //config fileupload middleware
