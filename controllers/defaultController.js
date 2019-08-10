@@ -48,16 +48,19 @@ module.exports = {
                 req.flash('error_message', 'Email already exists, try to login');
                 res.redirect('/register');
             } else {
-                const emailUser = await User.findOne({ email: email });
+                const emailUser = await User.findOne({ email });
                 if(emailUser) {
                     req.flash('error_message', 'The Email is already in use!');
                     res.redirect('/register');
                 }
                 const newUser = new User({ firstName, lastName, email, password });
                 newUser.password = await newUser.generateHash(password);
-                await newUser.save();
-                req.flash('success_messsage', 'You are registered');
-                res.redirect('/login');
+                await newUser.save((err) => {
+                    if(err) throw err;
+                    req.flash('success_messsage', 'You are registered');
+                    res.redirect('/login');
+                });
+                
             }
             
         }
