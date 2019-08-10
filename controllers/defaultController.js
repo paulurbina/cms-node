@@ -64,5 +64,17 @@ module.exports = {
             }
             
         }
+    },
+    singlePost: async (req, res) => {
+        const post = await Post.findById(req.params.id);
+        console.log(post);
+        
+        //verifity post
+        if(!post) {
+            res.status(404).json({ message: 'Not found Post'});
+        } else {
+            res.render('default/singlePost', { post });
+        }
     }
+
 }

@@ -28,4 +28,8 @@ router.route('/register')
         .get(defaultController.registerGet)
         .post(defaultController.registerPost);
 
+//post Single
+router.route('/post/:id')
+        .get(defaultController.singlePost);
+
 module.exports = router;
