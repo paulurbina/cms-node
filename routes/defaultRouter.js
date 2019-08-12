@@ -32,4 +32,15 @@ router.route('/register')
 router.route('/post/:id')
         .get(defaultController.singlePost);
 
+//logout
+router.get('/logout', async (req, res) => {
+        try {
+                await req.logout();
+                req.flash('success_message', 'Logout was successfully');
+                res.redirect('/');
+        } catch(e) {
+                throw e;
+        }
+});
+
 module.exports = router;
