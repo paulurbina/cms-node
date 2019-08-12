@@ -36,6 +36,9 @@ router.route('/category/edit/:id')
         .get(adminController.editCategoryGet)
         .post(adminController.editCategoryPost);
 
+router.route('/comment')
+        .get(adminController.getComments);
+
 // table users
 router.route('/table')
         .get(adminController.table);

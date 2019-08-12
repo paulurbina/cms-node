@@ -30,7 +30,8 @@ router.route('/register')
 
 //post Single
 router.route('/post/:id')
-        .get(defaultController.singlePost);
+        .get(defaultController.getSinglePost)
+        .post(defaultController.submitComments);
 
 //logout
 router.get('/logout', (req, res) => {

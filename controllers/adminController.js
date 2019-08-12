@@ -1,5 +1,6 @@
 const Post = require('../models/Posts/Post');
 const Category = require('../models/Category.model');
+const Comment = require('../models/Commet.model');
 const { isEmpty } = require('../config/customFunctions');
 
 module.exports = {
@@ -142,6 +143,10 @@ module.exports = {
                 url: '/admin/category'
             });
         }
+    },
+    /** controllers comments admin */
+    getComments: async (req, res) => {
+        const comments = await Comment.find().populate('user');
+        res.render('admin/comments/index', { comments });
     }
-
 }

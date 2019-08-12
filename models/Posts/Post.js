@@ -15,16 +15,16 @@ const PostSchema = new Schema({
     },
     user: {
         type: Schema.Types.ObjectId,
-        ref: 'user'
+        ref: 'User'
     },
     category: {
         type: Schema.Types.ObjectId,
         ref: 'Category'
     },
-    comments: {
+    comments: [{
         type: Schema.Types.ObjectId,
-        ref: 'comment'
-    },
+        ref: 'Comment'
+    }],
     allowComments: {
         type: Boolean,
         default: false

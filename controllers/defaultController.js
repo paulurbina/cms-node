@@ -1,4 +1,5 @@
 const Post = require('../models/Posts/Post');
+const Comment = require('../models/Commet.model');
 const Category = require('../models/Category.model');
 const User = require('../models/User.model');
 
@@ -65,9 +66,8 @@ module.exports = {
             
         }
     },
-    singlePost: async (req, res) => {
+    getSinglePost: async (req, res) => {
         const post = await Post.findById(req.params.id);
-        console.log(post);
         
         //verifity post 
         if(!post) {
@@ -75,6 +75,41 @@ module.exports = {
         } else {
             res.render('default/singlePost', { post });
         }
+    },
+    submitComments: async (req, res) => {
+        if (req.user) {
+            const post = await Post.findById(req.body.id);
+            // If and only if
+            if(post) {
+                // save data in model Comment
+                const newComment = await new Comment({
+                    user: req.user.id,
+                    body: req.body.contentBody
+                });
+                //all Ok with comment
+                if(newComment) {
+                    await post.comments.push(newComment);
+                    
+                    //save all data in model Post
+                    const savePost = await post.save();
+                    // if all ok!
+                    if(savePost) {
+                        const saveNewComment = await newComment.save();
+                        if (saveNewComment) {
+                            req.flash('success_message', 'Your comment was submitted for review.')
+                            res.redirect(`/post/${post._id}`);
+                        }
+                    }
+                }
+
+            }
+        }
+
+        else {
+            req.flash('error-message', 'Login first to comment');
+            res.redirect('/login');
+        }
     }
 
 }
+
