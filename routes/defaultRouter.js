@@ -33,9 +33,9 @@ router.route('/post/:id')
         .get(defaultController.singlePost);
 
 //logout
-router.get('/logout', async (req, res) => {
+router.get('/logout', (req, res) => {
         try {
-                await req.logout();
+                req.logout();
                 req.flash('success_message', 'Logout was successfully');
                 res.redirect('/');
         } catch(e) {
