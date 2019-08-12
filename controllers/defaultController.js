@@ -69,7 +69,7 @@ module.exports = {
         const post = await Post.findById(req.params.id);
         console.log(post);
         
-        //verifity post
+        //verifity post 
         if(!post) {
             res.status(404).json({ message: 'Not found Post'});
         } else {

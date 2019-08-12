@@ -12,7 +12,14 @@ const { selectOptions } = require('./config/customFunctions');
 const { mongoUrlNative, PORT, globalVariables, mongoServiceMlab } = require('./config/config');
 
 // configure mongoose to connect db 
-mongoose.connect(mongoServiceMlab || mongoUrlNative, { useNewUrlParser: true}) 
+const options = {
+    reconnectTries: 5000,
+    reconnectInterval: 0,
+    socketTimeoutMS: 100000,
+    connectTimeoutMS: 100000,
+};
+
+mongoose.connect(mongoUrlNative || mongoUrlNative, { useNewUrlParser: true}) 
     .then(db => console.log('>> Connect Database Native'))
     .catch(e => console.log(e));
 

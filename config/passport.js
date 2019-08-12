@@ -3,9 +3,8 @@ const passport = require('passport');
 
 const User = require('../models/User.model');
 
-
 //defining local strategy
-//login Users
+//login Users   
 passport.use(new LocalStrategy({
     usernameField: 'email'
 }, async (email, password, done) => {
